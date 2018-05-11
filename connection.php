@@ -1,5 +1,5 @@
 <?php
-$servername = "http://206.189.152.236/phpmyadmin/";
+$servername = "localhost";
 $username = "access";
 $password = "thisisaseriouslylongpassword";
 
