@@ -25,6 +25,13 @@
   <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
 
+  <!-- CAPTCHA -->
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script>
+    function enableBtn(){
+      document.getElementById("registerBtn").disabled = false;
+    }
+  </script>
 </head>
 
 <body>
@@ -352,40 +359,54 @@
           <div class="col-sm-5 col-sm-offset-1 mb-40">
             <div class="login">
               <h4 class="uppercase">login</h4>
+              <form action="login.php" method="POST">
               <p class="form-row form-row-wide">
-                <label>username or email
+                <label>username
                   <abbr class="required" title="required">*</abbr>
                 </label>
-                <input type="text" class="input-text" placeholder="" value="">
+                <input type="text" class="input-text" placeholder="" value="" name="loginUserName">
               </p>
               <p class="form-row form-row-wide">
                 <label>password
                   <abbr class="required" title="required">*</abbr>
                 </label>
-                <input type="text" class="input-text" placeholder="" value="">
+                <input type="password" class="input-text" placeholder="" value="" name="loginUserPassword">
               </p>
               <input type="submit" value="Login" class="btn">
-              <input type="checkbox" class="input-checkbox" id="remember" name="remember" value="1">
-              <label for="remember" class="checkbox">Remember me</label>
-              <a href="#">Lost Password?</a>
+              </form>
+
             </div>
           </div>
           <div class="col-sm-5">
             <div class="register">
               <h4 class="uppercase">Register</h4>
+              <form action="register.php" method="POST">
               <p class="form-row form-row-wide">
-                <label>email
+                <label>username
                   <abbr class="required" title="required">*</abbr>
                 </label>
-                <input type="text" class="input-text" placeholder="" value="">
+                <input type="text" class="input-text" placeholder="" value="" name="signUpUserName">
               </p>
               <p class="form-row form-row-wide">
                 <label>password
                   <abbr class="required" title="required">*</abbr>
                 </label>
-                <input type="text" class="input-text" placeholder="" value="">
+                <input type="password" class="input-text" placeholder="" value="" name="signUpUserPassword">
               </p>
-              <input type="submit" value="Register" class="btn">
+              <p class="form-row form-row-wide">
+                  <label>email address
+                    <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" placeholder="" value="" name="signUpEmail">
+                </p>
+              <input type="submit" value="Register" class="btn" id="registerBtn">
+              <script>document.getElementById("registerBtn").disabled = true;
+                </script>
+             
+              <p>Hol up! Just a quick check to make sure you are not robot 🤖</p>
+              <div class="g-recaptcha" class="" data-sitekey="6Lcun1gUAAAAAI0lSdDn0cawbVZXrPizPTuc-TxX" data-callback="enableBtn"></div> 
+              
+              </form>
             </div>
           </div>
         </div>
