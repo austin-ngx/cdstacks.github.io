@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -341,18 +341,22 @@
         <div class="entry-slider">
           <div class="flexslider" id="flexslider-hero">
             <ul class="slides clearfix">
-              <li>
-                <img src="img/slider/1.jpg" alt="">
-                <div class="hero-holder text-center right-align">
-                  <div class="hero-lines">
-                    <h3 class="hero-heading white">My Dear Melancholy, (2018)</h3>
-                    <h4 class="hero-subheading white uppercase">mini-album by The Weeknd</h4>
-                  </div>
-                  <a href="#" class="btn btn-lg btn-white">
-                    <span>More info</span>
-                  </a>
-                </div>
-              </li>
+            <?php
+
+              echo '<li>';
+              echo '  <img src="$bla.path" alt="">';
+              echo '  <div class="hero-holder text-center right-align">';
+              echo '    <div class="hero-lines">';
+              echo '      <h3 class="hero-heading white">My Dear Melancholy, (2018)</h3>';
+              echo '      <h4 class="hero-subheading white uppercase">mini-album by The Weeknd</h4>';
+              echo '    </div>';
+              echo '    <a href="#" class="btn btn-lg btn-white">';
+              echo '      <span>More info</span>';
+              echo '    </a>';
+              echo '  </div>';
+              echo '</li>';
+			  
+            ?>
               <li>
                 <img src="img/slider/2.jpg" alt="">
                 <div class="hero-holder text-center">
