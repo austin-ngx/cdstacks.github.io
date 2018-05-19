@@ -171,7 +171,7 @@
                   </div>
                   <!-- Search -->
                   <div class="nav-search hidden-sm hidden-xs">
-                    <form method="get">
+                    <form method="get" action="search.php">
                       <input type="search" class="form-control" placeholder="Search">
                       <button type="submit" class="search-button">
                         <i class="icon icon_search"></i>

@@ -119,14 +119,7 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                         </button>
-                                <!-- Mobile cart -->
-                                <div class="nav-cart mobile-cart hidden-lg hidden-md">
-                                    <div class="nav-cart-outer">
-                                        <div class="nav-cart-inner">
-                                            <a href="#" class="nav-cart-icon">2</a>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <!-- end navbar-header -->
 
@@ -143,8 +136,8 @@
                                     </div>
                                     <!-- Search -->
                                     <div class="nav-search hidden-sm hidden-xs">
-                                        <form method="get">
-                                            <input type="search" class="form-control" placeholder="Search">
+                                        <form method="get" action="search.php">
+                                            <input type="search" class="form-control" placeholder="Search" name="search">
                                             <button type="submit" class="search-button">
                                 <i class="icon icon_search"></i>
                               </button>
@@ -162,8 +155,8 @@
                                     <ul class="nav navbar-nav">
 
                                         <li id="mobile-search" class="hidden-lg hidden-md">
-                                            <form method="get" class="mobile-search relative">
-                                                <input type="search" class="form-control" placeholder="Search...">
+                                            <form method="get" action="search.php" class="mobile-search relative">
+                                                <input name="search" type="search" class="form-control" placeholder="Search...">
                                                 <button type="submit" class="search-button">
                                   <i class="icon icon_search"></i>
                                 </button>

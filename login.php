@@ -17,14 +17,14 @@ $username = stripslashes($username);
 $password = stripslashes($password);
 $username = mysql_real_escape_string($username);
 $password = mysql_real_escape_string($password);
-$password = md5($password);
+$pass = md5($password);
 // Selecting Database
 $db = mysql_select_db("shop", $connection);
 // SQL query to fetch information of registerd users and finds user match.
-$query = mysql_query("select * from USERINFO where USER_PASSWORD='$password' AND USER_NAME='$username'", $connection);
+$query = mysql_query("select * from CUSTOMERS where PASSWORD='$pass' AND NAME='$username'", $connection);
 $rows = mysql_num_rows($query);
 if ($rows == 1) {
-$_SESSION['login_user']=$username; // Initializing Session
+$_SESSION['loginUserName']=$username; // Initializing Session
 header("location: user.php"); // Redirecting To Other Page
 } else {
 $error = "Username or Password is invalid";
