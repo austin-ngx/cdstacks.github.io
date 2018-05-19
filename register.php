@@ -1,47 +1,28 @@
 
 
 <?php
+session_start();
+require 'connection.php';
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'shop');
-define('DB_USER','access');
-define('DB_PASSWORD','onetwothreefour5');
-
-$con=mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die("Failed to connect to MySQL: " . mysql_error());
-$db=mysql_select_db(DB_NAME,$con) or die("Failed to connect to MySQL: " . mysql_error());
-
-
-function NewUser()
-{
-	$id = $_POST['regID'];
-	$pwd = $_POST['regPassword'];
-	$email = $_POST['regEmail'];
-	$query = "INSERT INTO USERINFO (USER_NAME,USER_PASSWORD,USER_EMAIL) VALUES ('$id','$pwd','$email')";
-	$data = mysql_query ($query)or die(mysql_error());
-	if($data)
-	{
-	echo "YOUR REGISTRATION IS COMPLETED...";
-	}
+function validate_input($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  return $data;
 }
 
-function SignUp()
-{
-if(!empty($_POST['regID']))   //checking the 'user' name which is from Sign-Up.html, is it empty or have some text
-{
-	$query = mysql_query("SELECT * FROM USERINFO WHERE USER_NAME = '$_POST[regID]' AND pass = '$_POST[regPassword]'") or die(mysql_error());
+$id = validate_input($_POST['regID']);
+$email = validate_input($_POST['regEmail']);
+$password = validate_input($_POST['regPassword']);
+$pass_hash = md5($password);
 
-	if(!$row = mysql_fetch_array($query) or die(mysql_error()))
-	{
-		newuser();
-	}
-	else
-	{
-		echo "SORRY...YOU ARE ALREADY REGISTERED USER...";
-	}
-}
-}
-if(isset($_POST['registerBtn']))
-{
-	SignUp();
-}
+$sql_insert = "INSERT INTO CUSTOMERS (NAME, PASSWORD, EMAIL) VALUES ('".$id."', '".$pass_hash."', '".$email."')";
+mysqli_query($conn, $sql_insert);
+
+echo "Register successfully, now get you back to the login page...";
+$_SESSION['loginUserName']= $id;
+$_SESSION['loginUserPassword']= $pass_hash;
+echo '<script type="text/javascript">window.location.href="login.html";</script>';
+
+die();
+
 ?>
