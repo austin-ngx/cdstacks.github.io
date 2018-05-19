@@ -1,40 +1,47 @@
+
+
 <?php
-SESSION_START();
-$error=''; // Variable To Store Error Message
-if (isset($_POST['submit'])) {
-if (empty($_POST['signUpUserName']) || empty($_POST['signUpUserPassword']) || empty($_POST['signUpEmail'])) {
-$error = "All field MUST be filled";
-}
-else
+
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'shop');
+define('DB_USER','access');
+define('DB_PASSWORD','onetwothreefour5');
+
+$con=mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die("Failed to connect to MySQL: " . mysql_error());
+$db=mysql_select_db(DB_NAME,$con) or die("Failed to connect to MySQL: " . mysql_error());
+
+
+function NewUser()
 {
-// Define $username and $password
-$username=$_POST['signUpUserName'];
-$password=$_POST['signUpUserPassword'];
-$email=$_POST['signUpEmail'];
-
-// Establishing Connection with Server by passing server_name, user_id and password as a parameter
-$connection = mysql_connect("localhost", "access", "onetwothreefour5");
-// To protect MySQL injection for Security purpose
-$username = stripslashes($username);
-$password = stripslashes($password);
-$email = stripslashes($email);
-$username = mysql_real_escape_string($username);
-$password = mysql_real_escape_string($password);
-$password = md5($password);
-$email = mysql_real_escape_string($email);
-
-// Selecting Database
-$db = mysql_select_db("shop", $connection);
-// SQL query to fetch information of registerd users and finds user match.
-$query = mysql_query("INSERT INTO USERINFO ('USER_NAME', 'USER_PASSWORD', 'USER_EMAIL') VALUES ('$username','$password','$email')", $connection);
-$rows = mysql_num_rows($query);
-if ($rows == 1) {
-$_SESSION['login_user']=$username; // Initializing Session
-header("location: user.php"); // Redirecting To Other Page
-} else {
-$error = "ERROR";
+	$id = $_POST['regID'];
+	$pwd = $_POST['regPassword'];
+	$email = $_POST['regEmail'];
+	$query = "INSERT INTO USERINFO (USER_NAME,USER_PASSWORD,USER_EMAIL) VALUES ('$id','$pwd','$email')";
+	$data = mysql_query ($query)or die(mysql_error());
+	if($data)
+	{
+	echo "YOUR REGISTRATION IS COMPLETED...";
+	}
 }
-mysql_close($connection); // Closing Connection
+
+function SignUp()
+{
+if(!empty($_POST['regID']))   //checking the 'user' name which is from Sign-Up.html, is it empty or have some text
+{
+	$query = mysql_query("SELECT * FROM USERINFO WHERE USER_NAME = '$_POST[regID]' AND pass = '$_POST[regPassword]'") or die(mysql_error());
+
+	if(!$row = mysql_fetch_array($query) or die(mysql_error()))
+	{
+		newuser();
+	}
+	else
+	{
+		echo "SORRY...YOU ARE ALREADY REGISTERED USER...";
+	}
 }
+}
+if(isset($_POST['registerBtn']))
+{
+	SignUp();
 }
 ?>
