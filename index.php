@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -94,9 +94,6 @@
                           <a href="#">English</a>
                         </li>
                         <li>
-                          <a href="#">Spanish</a>
-                        </li>
-                        <li>
                           <a href="#">Vietnamese</a>
                         </li>
                         <li>
@@ -105,7 +102,7 @@
                       </ul>
                     </div>
                   </li>
-                  <li>
+                  <!--<li>
                     <div class="social-icons">
                       <a href="#">
                         <i class="fa fa-twitter"></i>
@@ -123,7 +120,7 @@
                         <i class="fa fa-vimeo"></i>
                       </a>
                     </div>
-                  </li>
+                  </li>-->
                 </ul>
 
               </div>
@@ -164,7 +161,7 @@
                   <!-- Logo -->
                   <div class="logo-container">
                     <div class="logo-wrap text-center">
-                      <a href="index.html">
+                      <a href="index.php">
                         <img class="logo" src="img/logo_dark.png" alt="logo">
                       </a>
                     </div>
@@ -197,11 +194,6 @@
                         </button>
                       </form>
                     </li>
-
-                    <li class="dropdown">
-                      <a href="index.html">Home</a>
-                    </li>
-
                     <li class="dropdown">
                       <a href="#">Account</a>
                       <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>
@@ -342,22 +334,30 @@
           <div class="flexslider" id="flexslider-hero">
             <ul class="slides clearfix">
             <?php
+			include 'connection.php';
 
-              echo '<li>';
-              echo '  <img src="$bla.path" alt="">';
-              echo '  <div class="hero-holder text-center right-align">';
-              echo '    <div class="hero-lines">';
-              echo '      <h3 class="hero-heading white">My Dear Melancholy, (2018)</h3>';
-              echo '      <h4 class="hero-subheading white uppercase">mini-album by The Weeknd</h4>';
-              echo '    </div>';
-              echo '    <a href="#" class="btn btn-lg btn-white">';
-              echo '      <span>More info</span>';
-              echo '    </a>';
-              echo '  </div>';
-              echo '</li>';
-			  
+			$sql = "SELECT PRODUCTS.*, PICTURES.PATH FROM PRODUCTS INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID";
+			$results = mysqli_query($conn, $sql);
+
+			if(mysqli_num_rows($results) > 0){
+				while($row = mysqli_fetch_assoc($results)){
+					echo '<li>';
+					echo '  <img src="'.$row["PATH"].'" alt="">';
+					echo '  <div class="hero-holder text-center right-align">';
+					echo '    <div class="hero-lines">';
+					echo '      <h3 class="hero-heading white">'.$row["NAME"].'</h3>';
+					echo '      <h4 class="hero-subheading white uppercase">'.$row["DESCRIPTION"].'</h4>';
+					echo '    </div>';
+					echo '    <a href="shop-single-product.php?productId='.$row["ID"].'" class="btn btn-lg btn-white">';
+					echo '      <span>More info</span>';
+					echo '    </a>';
+					echo '  </div>';
+					echo '</li>';
+				}
+			}
+			
             ?>
-              <li>
+              <!--<li>
                 <img src="img/slider/2.jpg" alt="">
                 <div class="hero-holder text-center">
                   <div class="hero-lines">
@@ -397,6 +397,7 @@
                   </a>
                 </div>
               </li>
+			  -->
             </ul>
           </div>
         </div>
@@ -418,107 +419,113 @@
         </div>
 
         <div class="row row-10">
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_1.jpg" alt="">
-                  <img src="img/shop/shop_item_1_back.jpg" alt="" class="back-img">
-                </a>
-                <div class="product-label">
-                  <span class="featured">featured</span>
-                </div>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">Man Of The Woods!</a>
-                  <p>Justin Timberlake</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$17.99</span>
-                  </ins>
-                </span>
-              </div>
-            </div>
-          </div>
+		<?php
+            $sql = "SELECT PRODUCTS.NAME, PRODUCTS.DESCRIPTION, PICTURES.PATH FROM PRODUCTS ORDER BY ID DESC LIMIT 4";
+            $results = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($results) > 0){
+                while($row = mysqli_fetch_assoc($results)){
+                    echo '<div class="col-md-3 col-xs-6">';
+                    echo '  <div class="product-item">';
+                    echo '    <div class="product-img">';
+                    echo '      <a href="#">';
+                    echo '        <img src="'.$row["PATH"].'" alt="">';
+                    echo '          <img src="'.$row["PATH"].'" alt="" class="back-img">';
+                    echo '      </a>';
+                    echo '      <a href="#" class="product-quickview">Read Review</a>';
+                    echo '    </div>';
+                    echo '    <div class="product-details">';
+                    echo '      <h3>';
+                    echo '        <a class="product-title" href="shop-single-product.php?productId='.$row["NAME"].'">'.$row["NAME"].'</a>';
+                    echo '        <p>'.$row["Author"].'</p>';
+                    echo '      </h3>';
+                    echo '      <span class="price">';
+                    echo '        <ins>';
+                    echo '          <span class="ammount">$17.99</span>';
+                    echo '        </ins>';
+                    echo '      </span>';
+                    echo '    </div>';
+                    echo '  </div>';
+                    echo '</div>';
+                }
+            }
+			mysqli_close($conn);
+        ?>
 
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_2.jpg" alt="">
-                  <img src="img/shop/shop_item_2_back.jpg" alt="" class="back-img">
-                </a>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">Evolve</a>
-                  <p>Imagine Dragons</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$21.59</span>
-                  </ins>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_3.jpg" alt="">
-                  <img src="img/shop/shop_item_3_back.jpg" alt="" class="back-img">
-                </a>
-                <div class="product-label">
-                  <span class="sale">clearance</span>
+            <div class="col-md-3 col-xs-6">
+                <div class="product-item">
+                    <div class="product-img">
+                        <a href="#">
+                            <img src="img/shop/shop_item_2.jpg" alt="">
+                            <img src="img/shop/shop_item_2_back.jpg" alt="" class="back-img">
+                        </a>
+                        <a href="#" class="product-quickview">Read Review</a>
+                    </div>
+                    <div class="product-details">
+                        <h3>
+                            <a class="product-title" href="shop-single-product.html">Evolve</a>
+                            <p>Imagine Dragons</p>
+                        </h3>
+                        <span class="price">
+                            <ins>
+                                <span class="ammount">$21.59</span>
+                            </ins>
+                        </span>
+                    </div>
                 </div>
-                <span class="sold-out valign">out of stock</span>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">reputation</a>
-                  <p>Taylor Swift</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$9.99</span>
-                  </ins>
-                </span>
-              </div>
             </div>
-          </div>
 
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_4.jpg" alt="">
-                  <img src="img/shop/shop_item_4_back.jpg" alt="" class="back-img">
-                </a>
-                <div class="product-label">
-                  <span class="best">best</span>
+            <div class="col-md-3 col-xs-6">
+                <div class="product-item">
+                    <div class="product-img">
+                        <a href="#">
+                            <img src="img/shop/shop_item_3.jpg" alt="">
+                            <img src="img/shop/shop_item_3_back.jpg" alt="" class="back-img">
+                        </a>
+                        <div class="product-label">
+                            <span class="sale">clearance</span>
+                        </div>
+                        <span class="sold-out valign">out of stock</span>
+                        <a href="#" class="product-quickview">Read Review</a>
+                    </div>
+                    <div class="product-details">
+                        <h3>
+                            <a class="product-title" href="shop-single-product.html">reputation</a>
+                            <p>Taylor Swift</p>
+                        </h3>
+                        <span class="price">
+                            <ins>
+                                <span class="ammount">$9.99</span>
+                            </ins>
+                        </span>
+                    </div>
                 </div>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">Melodrama</a>
-                  <p>Lorde</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$29.99</span>
-                  </ins>
-                </span>
-              </div>
             </div>
-          </div>
+
+            <div class="col-md-3 col-xs-6">
+                <div class="product-item">
+                    <div class="product-img">
+                        <a href="#">
+                            <img src="img/shop/shop_item_4.jpg" alt="">
+                            <img src="img/shop/shop_item_4_back.jpg" alt="" class="back-img">
+                        </a>
+                        <div class="product-label">
+                            <span class="best">best</span>
+                        </div>
+                        <a href="#" class="product-quickview">Read Review</a>
+                    </div>
+                    <div class="product-details">
+                        <h3>
+                            <a class="product-title" href="shop-single-product.html">Melodrama</a>
+                            <p>Lorde</p>
+                        </h3>
+                        <span class="price">
+                            <ins>
+                                <span class="ammount">$29.99</span>
+                            </ins>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <!-- end row -->
