@@ -336,7 +336,7 @@
             <?php
 			include 'connection.php';
 
-			$sql = "SELECT PRODUCTS.*, PICTURES.PATH FROM PRODUCTS INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID";
+			$sql = "SELECT DISTINCT PRODUCTS.*, PICTURES.PATH FROM PRODUCTS INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID ORDER BY RAND() LIMIT 5";
 			$results = mysqli_query($conn, $sql);
 
 			if(mysqli_num_rows($results) > 0){
@@ -420,14 +420,17 @@
 
         <div class="row row-10">
 		<?php
-            $sql = "SELECT PRODUCTS.NAME, PRODUCTS.DESCRIPTION, PICTURES.PATH FROM PRODUCTS ORDER BY ID DESC LIMIT 4";
+            $sql = "SELECT DISTINCT PRODUCTS.*, ARTISTS.NAME as ARTIST, PICTURES.PATH FROM PRODUCTS ";
+			$sql .= "INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID ";
+			$sql .= "INNER JOIN ARTISTS ON PRODUCTS.ARTIST_ID = ARTISTS.ID ";
+			$sql .= "ORDER BY ID DESC LIMIT 4";
             $results = mysqli_query($conn, $sql);
             if(mysqli_num_rows($results) > 0){
                 while($row = mysqli_fetch_assoc($results)){
                     echo '<div class="col-md-3 col-xs-6">';
                     echo '  <div class="product-item">';
                     echo '    <div class="product-img">';
-                    echo '      <a href="#">';
+                    echo '      <a href="shop-single-product.php?productId='.$row["ID"].'">';
                     echo '        <img src="'.$row["PATH"].'" alt="">';
                     echo '          <img src="'.$row["PATH"].'" alt="" class="back-img">';
                     echo '      </a>';
@@ -435,12 +438,12 @@
                     echo '    </div>';
                     echo '    <div class="product-details">';
                     echo '      <h3>';
-                    echo '        <a class="product-title" href="shop-single-product.php?productId='.$row["NAME"].'">'.$row["NAME"].'</a>';
-                    echo '        <p>'.$row["Author"].'</p>';
+                    echo '        <a class="product-title" href="#">'.$row["NAME"].'</a>';
+                    echo '        <p>'.$row["ARTIST"].'</p>';
                     echo '      </h3>';
                     echo '      <span class="price">';
                     echo '        <ins>';
-                    echo '          <span class="ammount">$17.99</span>';
+                    echo '          <span class="ammount">$'.$row["PRICE"].'</span>';
                     echo '        </ins>';
                     echo '      </span>';
                     echo '    </div>';
@@ -451,7 +454,7 @@
 			mysqli_close($conn);
         ?>
 
-            <div class="col-md-3 col-xs-6">
+            <!--<div class="col-md-3 col-xs-6">
                 <div class="product-item">
                     <div class="product-img">
                         <a href="#">
@@ -525,7 +528,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
         <!-- end row -->
