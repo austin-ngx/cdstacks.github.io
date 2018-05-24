@@ -7,29 +7,27 @@ if (isset($_POST['submit'])) {
     }
     else
     {
-        // Define $username and $password
+		include 'connection.php';
+
         $username=$_POST['loginUserName'];
         $password=$_POST['loginUserPassword'];
-        // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-        $connection = mysql_connect("localhost", "access", "onetwothreefour5");
-        // To protect MySQL injection for Security purpose
+
         $username = stripslashes($username);
         $password = stripslashes($password);
         $username = mysql_real_escape_string($username);
         $password = mysql_real_escape_string($password);
         $pass = md5($password);
-        // Selecting Database
-        $db = mysql_select_db("shop", $connection);
+
         // SQL query to fetch information of registerd users and finds user match.
-        $query = mysql_query("select * from CUSTOMERS where PASSWORD='$pass' AND NAME='$username'", $connection);
-        $rows = mysql_num_rows($query);
-        if ($rows == 1) {
+		$sql = "select * from CUSTOMERS where PASSWORD='$pass' AND NAME='$username'";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) == 1){
             $_SESSION['loginUserName']=$username; // Initializing Session
             header("location: user.php"); // Redirecting To Other Page
         } else {
             $error = "Username or Password is invalid";
         }
-        mysql_close($connection); // Closing Connection
+        mysqli_close($conn); // Closing Connection
     }
 }
 ?>
