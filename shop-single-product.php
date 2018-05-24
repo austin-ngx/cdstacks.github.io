@@ -294,10 +294,6 @@
 			<div class="container relative">
 				<div class="row">
 					<?php
-					ini_set('display_errors', 1);
-					ini_set('display_startup_errors', 1);
-					error_reporting(E_ALL);
-
 					$productId = $_GET["productId"];
 					include 'connection.php';
 					$sql = "SELECT * FROM PRODUCTS WHERE ID = ".$productId;
@@ -332,7 +328,7 @@
 						<?php
 							foreach($picturesList as $item){
 								echo '<div class="gallery-cell">';
-								echo '<img src="'.$item["PATH"].'" alt="" />';
+								echo '	<img src="'.$item["PATH"].'" alt="" />';
 								echo '</div>';
 							}
 						?>
@@ -342,8 +338,18 @@
 					<!-- end col img slider -->
 					<div class="col-sm-6 col-xs-12 product-description-wrap">
 						<h1 class="product-title"><?php echo $productObject["NAME"]; ?></h1>
-						<span class="rating">
-						</span>
+						
+						<div class="product_meta">
+							<!--<span class="sku">SKU: <a href="#">111763</a></span>-->
+							<?php
+								$sql = "SELECT NAME FROM GENRES WHERE ID = ".$productObject["GENRE_ID"];
+								$result = mysqli_query($conn, $sql);
+								$genre = mysqli_fetch_assoc($result);
+								echo '<span class="posted_in">Category: <a href="#">'.$genre["NAME"].'</a></span>';
+							?>
+							<!--<span class="tagged_as">Tags: <a href="#">Post Malone</a>, <a href="#">Hot 100</a></span>-->
+						</div>
+
 						<span class="price">
 							<del>
 								<span>$<?php echo $productObject["PRICE"] * 1.3; ?></span>
@@ -352,6 +358,8 @@
 								<span class="amount">$<?php echo $productObject["PRICE"]; ?></span>
 							</ins>
 						</span>
+
+						<!--<span class="rating"></span>-->
 						<p class="product-description">
 							<?php echo $productObject["DESCRIPTION"]; ?>
 						</p>
@@ -388,23 +396,14 @@
 							</li>
 							<li>
 								<div class="quantity buttons_added">
-									<input type="button" value="-" class="minus" /><input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text" /><input type="button" value="+" class="plus" />
+									<input id="btnMinus" type="button" value="-" class="minus" />
+									<input id="inputQty" type="number" step="1" min="0" max="10" value="1" title="Qty" class="input-text qty text" />
+									<input id="btnPlus" type="button" value="+" class="plus" />
 								</div>
 							</li>
 						</ul>
 
-						<div class="product_meta">
-							<span class="sku">SKU: <a href="#">111763</a></span>
-							<?php
-								$sql = "SELECT NAME FROM GENRES WHERE ID = ".$productObject["GENRE_ID"];
-								$result = mysqli_query($conn, $sql);
-								$genre = mysqli_fetch_assoc($result);
-								echo '<span class="posted_in">Category: <a href="#">'.$genre["NAME"].'</a></span>';
-							?>
-							<span class="tagged_as">Tags: <a href="#">Post Malone</a>, <a href="#">Hot 100</a></span>
-						</div>
-
-						<div class="socials-share clearfix">
+						<!--<div class="socials-share clearfix">
 							<div class="social-icons rounded">
 								<a href="#"><i class="fa fa-twitter"></i></a>
 								<a href="#"><i class="fa fa-facebook"></i></a>
@@ -412,7 +411,7 @@
 								<a href="#"><i class="fa fa-linkedin"></i></a>
 								<a href="#"><i class="fa fa-vimeo"></i></a>
 							</div>
-						</div>
+						</div>-->
 					</div>
 					<!-- end col product description -->
 				</div>
@@ -428,9 +427,6 @@
 								<li>
 									<a href="#tab-info" data-toggle="tab">Track List</a>
 								</li>
-								<li>
-									<a href="#tab-reviews" data-toggle="tab">Reviews</a>
-								</li>
 							</ul>
 							<!-- end tabs -->
 							<!-- tab content -->
@@ -438,65 +434,20 @@
 
 								<div class="tab-pane fade in active" id="tab-description">
 									<p>
-										On Beerbongs &amp; Bentleys, he sorta stops trying altogether. The album is largely what you'd expect from Post given his recent singles and the largesse they've brought him: It's a celebration of being young, famous and fantastically wealthy, with an
-										undercurrent of heartbreak casting a pall on the artist's superficial prosperity. One song, called "Rich &amp; Sad," could very accurately title the whole album, the contrast broken down fairly literally into its chorus: "I just keep
-										on wishing that the money made you stay." It's not the most urgent of subject matter, though given Post's current age and status -- "Multi-millionaire by the time I'm 23," he reminds us on the yuk-ily titled "Zack and Codeine" -- and
-										his reluctance to embrace difficult subject matter, it's hard to know what else he really should be writing about.
+										<?php echo $productObject["CRITICS"]; ?>
 									</p>
 								</div>
 
 								<div class="tab-pane fade" id="tab-info">
-									<p>1. “Paranoid”</p>
-									<p>2. “Spoil My Night” (Feat. Swae Lee)</p>
-									<p>3. “Rich &amp; Sad”</p>
-									<p>4. “Zack and Codeine”</p>
-									<p>5. “Takin’ Shots”</p>
-									<p>6. “Rockstar” (Feat. 21 Savage)</p>
-									<p>7. “Over Now”</p>
-									<p>8. “Psycho” (Feat. Ty Dolla $ign)</p>
-									<p>9. “Better Now”</p>
-									<p>10. “Ball For Me” (Feat. Nicki Minaj)</p>
-									<p>11. “Otherside”</p>
-									<p>12. “Stay”</p>
-									<p>13. “Blame It On Me”</p>
-									<p>14. “Same Bitches” (Feat. G-Eazy &amp; YG)</p>
-									<p>15. “Jonestown (Interlude)”</p>
-									<p>16. “92 Explorer”</p>
-									<p>17. “Candy Paint”</p>
-									<p>18. “Sugar Wraith”</p>
-								</div>
-
-								<div class="tab-pane fade" id="tab-reviews">
-
-									<div class="reviews">
-										<ul class="reviews-list">
-											<li>
-												<div class="review-body">
-													<div class="review-content">
-														<p class="review-author"><strong>Alexander Samokhin</strong> - May 6, 2018 at 12:48 pm</p>
-														<div class="rating">
-															<a href="#"></a>
-														</div>
-														<p>This Album is so good everyone. I will rate 5 stars.</p>
-													</div>
-												</div>
-											</li>
-
-											<li>
-												<div class="review-body">
-													<div class="review-content">
-														<p class="review-author"><strong>Christopher Robins</strong> - May 15, 2018 at 12:48 pm</p>
-														<div class="rating">
-															<a href="#"></a>
-														</div>
-														<p>Definitely Hits!!.</p>
-													</div>
-												</div>
-											</li>
-
-										</ul>
-									</div>
-									<!--  end reviews -->
+									<?php 
+										$sql = "SELECT NUMBER, NAME FROM TRACKS WHERE PRODUCT_ID = ".$productId." ORDER BY NUMBER ASC";
+										$result = mysqli_query($conn, $sql);
+										if(mysqli_num_rows($result) > 0){
+											while($track = mysqli_fetch_assoc($result)){
+												echo "<p>".$track["NUMBER"]." - ".$track["NAME"]."</p>";
+											}
+										}
+									?>
 								</div>
 
 							</div>
@@ -510,106 +461,8 @@
 			<!-- end container -->
 		</section>
 		<!-- end single product -->
-		<!-- Footer Type-1 -->
-		<footer class="footer footer-type-1 bg-white">
-			<div class="container">
-				<div class="footer-widgets top-bottom-dividers pb-mdm-20">
-					<div class="row">
 
-						<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-12">
-							<div class="widget footer-links">
-								<h5 class="widget-title uppercase">Information</h5>
-								<ul class="list-no-dividers"></ul>
-							</div>
-						</div>
-
-						<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-12">
-							<div class="widget footer-links">
-								<h5 class="widget-title uppercase">Help</h5>
-								<ul class="list-no-dividers"></ul>
-							</div>
-						</div>
-
-						<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-12">
-							<div class="widget footer-links">
-								<h5 class="widget-title uppercase">Account</h5>
-								<ul class="list-no-dividers">
-									<li>
-										<a href="account.html">My account</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 col-xs-12">
-							<div class="widget">
-								<h5 class="widget-title uppercase">about us</h5>
-								<p class="mb-0">CD Stacks, a prototype eCommerce CD Store website. Created by Paulo Henrique Rocha Marchese ft. Quoc Cuong Nguyen as a part of AIT INT1059-B18 Advanced Web assignment.</p>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-sm-6 col-xs-12">
-							<div class="widget footer-get-in-touch">
-								<h5 class="widget-title uppercase">Contact</h5>
-								<address class="footer-address">
-									<span>Address:</span> .
-								</address>
-								<p>
-									Phone:
-									<a href="tel:+61">+61 123 456 789</a>
-								</p>
-								<p>
-									Email:
-									<a href="mailto:admin@cdstacks.com">admin@cdstacks.com</a>
-								</p>
-								<div class="social-icons rounded mt-20">
-									<a href="https://twitter.com/ait">
-										<i class="fa fa-twitter"></i>
-									</a>
-									<a href="https://facebook.com/ait">
-										<i class="fa fa-facebook"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-						<!-- end stay in touch -->
-					</div>
-				</div>
-			</div>
-			<!-- end container -->
-			<div class="bottom-footer bg-white">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-4 copyright sm-text-center">
-							<span>
-								&copy; CD Stacks 2018</a>
-							</span>
-						</div>
-
-						<div class="col-sm-4 text-center">
-							<div id="back-to-top">
-								<a href="#top">
-									<i class="fa fa-angle-up"></i>
-								</a>
-							</div>
-						</div>
-
-						<div class="col-sm-4 col-xs-12 footer-payment-systems text-right sm-text-center mt-sml-10">
-							<i class="fa fa-cc-paypal"></i>
-							<i class="fa fa-cc-visa"></i>
-							<i class="fa fa-cc-mastercard"></i>
-							<i class="fa fa-cc-discover"></i>
-							<i class="fa fa-cc-amex"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end bottom footer -->
-		</footer>
-		<!-- end footer -->
-		<div id="back-to-top">
-			<a href="#top"><i class="fa fa-angle-up"></i></a>
-		</div>
+		<?php include 'footer.php'; ?>
 
 	</main>
 	<!-- end main container -->
@@ -619,6 +472,20 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/plugins.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+	<script>
+		$('#btnMinus').click(function(){
+			var iNum = parseInt($('#inputQty').val());
+			if(iNum > 1){
+				$('#inputQty').val(iNum - 1);
+			}
+		});
+		$('#btnPlus').click(function(){
+			var iNum = parseInt($('#inputQty').val());
+			if(iNum < 10){
+				$('#inputQty').val(iNum + 1);
+			}
+		});
+	</script>
 
 </body>
 
