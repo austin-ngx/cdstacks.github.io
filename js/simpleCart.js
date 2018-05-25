@@ -72,7 +72,6 @@
                     "DKK": { code: "DKK", symbol: "DKK&nbsp;", name: "Danish Krone" },
                     "EUR": { code: "EUR", symbol: "&euro;", name: "Euro" },
                     "HKD": { code: "HKD", symbol: "&#36;", name: "Hong Kong Dollar" },
-                    "HUF": { code: "HUF", symbol: "&#70;&#116;", name: "Hungarian Forint" },
                     "ILS": { code: "ILS", symbol: "&#8362;", name: "Israeli New Sheqel" },
                     "JPY": { code: "JPY", symbol: "&yen;", name: "Japanese Yen", accuracy: 0 },
                     "MXN": { code: "MXN", symbol: "&#36;", name: "Mexican Peso" },
