@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -94,9 +94,6 @@
                           <a href="#">English</a>
                         </li>
                         <li>
-                          <a href="#">Spanish</a>
-                        </li>
-                        <li>
                           <a href="#">Vietnamese</a>
                         </li>
                         <li>
@@ -105,7 +102,7 @@
                       </ul>
                     </div>
                   </li>
-                  <li>
+                  <!--<li>
                     <div class="social-icons">
                       <a href="#">
                         <i class="fa fa-twitter"></i>
@@ -123,7 +120,7 @@
                         <i class="fa fa-vimeo"></i>
                       </a>
                     </div>
-                  </li>
+                  </li>-->
                 </ul>
 
               </div>
@@ -164,7 +161,7 @@
                   <!-- Logo -->
                   <div class="logo-container">
                     <div class="logo-wrap text-center">
-                      <a href="index.html">
+                      <a href="index.php">
                         <img class="logo" src="img/logo_dark.png" alt="logo">
                       </a>
                     </div>
@@ -197,11 +194,6 @@
                         </button>
                       </form>
                     </li>
-
-                    <li class="dropdown">
-                      <a href="index.html">Home</a>
-                    </li>
-
                     <li class="dropdown">
                       <a href="#">Account</a>
                       <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>
@@ -342,22 +334,29 @@
           <div class="flexslider" id="flexslider-hero">
             <ul class="slides clearfix">
             <?php
+				include 'connection.php';
 
-              echo '<li>';
-              echo '  <img src="$bla.path" alt="">';
-              echo '  <div class="hero-holder text-center right-align">';
-              echo '    <div class="hero-lines">';
-              echo '      <h3 class="hero-heading white">My Dear Melancholy, (2018)</h3>';
-              echo '      <h4 class="hero-subheading white uppercase">mini-album by The Weeknd</h4>';
-              echo '    </div>';
-              echo '    <a href="#" class="btn btn-lg btn-white">';
-              echo '      <span>More info</span>';
-              echo '    </a>';
-              echo '  </div>';
-              echo '</li>';
-			  
+				$sql = "SELECT DISTINCT PRODUCTS.*, PICTURES.PATH FROM PRODUCTS INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID ORDER BY RAND() LIMIT 5";
+				$results = mysqli_query($conn, $sql);
+
+				if(mysqli_num_rows($results) > 0){
+					while($row = mysqli_fetch_assoc($results)){
+						echo '<li>';
+						echo '  <img src="'.$row["PATH"].'" alt="">';
+						echo '  <div class="hero-holder text-center right-align">';
+						echo '    <div class="hero-lines">';
+						echo '      <h3 class="hero-heading white">'.$row["NAME"].'</h3>';
+						echo '      <h4 class="hero-subheading white uppercase">'.$row["DESCRIPTION"].'</h4>';
+						echo '    </div>';
+						echo '    <a href="shop-single-product.php?productId='.$row["ID"].'" class="btn btn-lg btn-white">';
+						echo '      <span>More info</span>';
+						echo '    </a>';
+						echo '  </div>';
+						echo '</li>';
+					}
+				}
             ?>
-              <li>
+              <!--<li>
                 <img src="img/slider/2.jpg" alt="">
                 <div class="hero-holder text-center">
                   <div class="hero-lines">
@@ -397,6 +396,7 @@
                   </a>
                 </div>
               </li>
+			  -->
             </ul>
           </div>
         </div>
@@ -418,108 +418,40 @@
         </div>
 
         <div class="row row-10">
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_1.jpg" alt="">
-                  <img src="img/shop/shop_item_1_back.jpg" alt="" class="back-img">
-                </a>
-                <div class="product-label">
-                  <span class="featured">featured</span>
-                </div>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">Man Of The Woods!</a>
-                  <p>Justin Timberlake</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$17.99</span>
-                  </ins>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_2.jpg" alt="">
-                  <img src="img/shop/shop_item_2_back.jpg" alt="" class="back-img">
-                </a>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">Evolve</a>
-                  <p>Imagine Dragons</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$21.59</span>
-                  </ins>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_3.jpg" alt="">
-                  <img src="img/shop/shop_item_3_back.jpg" alt="" class="back-img">
-                </a>
-                <div class="product-label">
-                  <span class="sale">clearance</span>
-                </div>
-                <span class="sold-out valign">out of stock</span>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">reputation</a>
-                  <p>Taylor Swift</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$9.99</span>
-                  </ins>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-xs-6">
-            <div class="product-item">
-              <div class="product-img">
-                <a href="#">
-                  <img src="img/shop/shop_item_4.jpg" alt="">
-                  <img src="img/shop/shop_item_4_back.jpg" alt="" class="back-img">
-                </a>
-                <div class="product-label">
-                  <span class="best">best</span>
-                </div>
-                <a href="#" class="product-quickview">Read Review</a>
-              </div>
-              <div class="product-details">
-                <h3>
-                  <a class="product-title" href="shop-single-product.html">Melodrama</a>
-                  <p>Lorde</p>
-                </h3>
-                <span class="price">
-                  <ins>
-                    <span class="ammount">$29.99</span>
-                  </ins>
-                </span>
-              </div>
-            </div>
-          </div>
-
+			<?php
+				$sql = "SELECT DISTINCT PRODUCTS.*, ARTISTS.NAME as ARTIST, PICTURES.PATH FROM PRODUCTS ";
+				$sql .= "INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID ";
+				$sql .= "INNER JOIN ARTISTS ON PRODUCTS.ARTIST_ID = ARTISTS.ID ";
+				$sql .= "ORDER BY ID DESC LIMIT 4";
+				$results = mysqli_query($conn, $sql);
+				if(mysqli_num_rows($results) > 0){
+					while($row = mysqli_fetch_assoc($results)){
+						echo '<div class="col-md-3 col-xs-6">';
+						echo '  <div class="product-item">';
+						echo '    <div class="product-img">';
+						echo '      <a href="shop-single-product.php?productId='.$row["ID"].'">';
+						echo '        <img src="'.$row["PATH"].'" alt="">';
+						echo '          <img src="'.$row["PATH"].'" alt="" class="back-img">';
+						echo '      </a>';
+						echo '      <a href="#" class="product-quickview">Read Review</a>';
+						echo '    </div>';
+						echo '    <div class="product-details">';
+						echo '      <h3>';
+						echo '        <a class="product-title" href="#">'.$row["NAME"].'</a>';
+						echo '        <p>'.$row["ARTIST"].'</p>';
+						echo '      </h3>';
+						echo '      <span class="price">';
+						echo '        <ins>';
+						echo '          <span class="ammount">$'.$row["PRICE"].'</span>';
+						echo '        </ins>';
+						echo '      </span>';
+						echo '    </div>';
+						echo '  </div>';
+						echo '</div>';
+					}
+				}
+				mysqli_close($conn);
+			?>
         </div>
         <!-- end row -->
       </div>
@@ -532,165 +464,16 @@
         <div class="col-sm-12">
           <div class="newsletter-box">
             <h5 class="uppercase">Subscribe to Receive Our Updates</h5>
-            <form>
-              <input type="email" class="newsletter-input" placeholder="Your email">
-              <input type="submit" class="newsletter-submit btn btn-md btn-dark" value="subscribe">
+            <form id="subForm" action="#">
+              <input id="subEmail" name="email" type="email" class="newsletter-input" placeholder="Your email">
+              <input id="btnSubSubmit" type="submit" class="newsletter-submit btn btn-md btn-dark" value="subscribe">
             </form>
           </div>
         </div>
       </div>
     </div>
 
-    
-    <!-- Footer Type-1 -->
-    <footer class="footer footer-type-1 bg-white">
-      <div class="container">
-        <div class="footer-widgets top-bottom-dividers pb-mdm-20">
-          <div class="row">
-
-            <div class="col-md-2 col-sm-4 col-xs-4 col-xxs-12">
-              <div class="widget footer-links">
-                <h5 class="widget-title uppercase">Information</h5>
-                <ul class="list-no-dividers">
-                  <li>
-                    <a href="#">Our stores</a>
-                  </li>
-                  <li>
-                    <a href="#">About us</a>
-                  </li>
-                  <li>
-                    <a href="#">Business with us</a>
-                  </li>
-                  <li>
-                    <a href="#">Delivery information</a>
-                  </li>
-                  <li>
-                    <a href="#">Terms &amp; Conditions</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-4 col-xxs-12">
-              <div class="widget footer-links">
-                <h5 class="widget-title uppercase">Help</h5>
-                <ul class="list-no-dividers">
-                  <li>
-                    <a href="#">Contact us</a>
-                  </li>
-                  <li>
-                    <a href="#">Track order</a>
-                  </li>
-                  <li>
-                    <a href="#">F.A.Q</a>
-                  </li>
-                  <li>
-                    <a href="#">Privacy policy</a>
-                  </li>
-                  <li>
-                    <a href="#">Returns</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-4 col-xxs-12">
-              <div class="widget footer-links">
-                <h5 class="widget-title uppercase">Account</h5>
-                <ul class="list-no-dividers">
-                  <li>
-                    <a href="#">My account</a>
-                  </li>
-                  <li>
-                    <a href="#">Wishlist</a>
-                  </li>
-                  <li>
-                    <a href="#">Order history</a>
-                  </li>
-                  <li>
-                    <a href="#">Special gifts</a>
-                  </li>
-                  <li>
-                    <a href="#">Track order</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="widget">
-                <h5 class="widget-title uppercase">about us</h5>
-                <p class="mb-0">rwighgwhgoihgo.</p>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="widget footer-get-in-touch">
-                <h5 class="widget-title uppercase">Contact</h5>
-                <address class="footer-address">
-                  <span>Address:</span> .</address>
-                <p>Phone:
-                  <a href="tel:+643">+212345678</a>
-                </p>
-                <p>Email:
-                  <a href="mailto:@gmail.com">@gmail.com</a>
-                </p>
-                <div class="social-icons rounded mt-20">
-                  <a href="#">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fa fa-google-plus"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fa fa-vimeo"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- end stay in touch -->
-
-          </div>
-        </div>
-      </div>
-      <!-- end container -->
-
-      <div class="bottom-footer bg-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4 copyright sm-text-center">
-              <span>
-                &copy; CDs</a>
-              </span>
-            </div>
-
-            <div class="col-sm-4 text-center">
-              <div id="back-to-top">
-                <a href="#top">
-                  <i class="fa fa-angle-up"></i>
-                </a>
-              </div>
-            </div>
-
-            <div class="col-sm-4 col-xs-12 footer-payment-systems text-right sm-text-center mt-sml-10">
-              <i class="fa fa-cc-paypal"></i>
-              <i class="fa fa-cc-visa"></i>
-              <i class="fa fa-cc-mastercard"></i>
-              <i class="fa fa-cc-discover"></i>
-              <i class="fa fa-cc-amex"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end bottom footer -->
-    </footer>
-    <!-- end footer -->
+    <?php include 'footer.php'; ?>
 
   </main>
   <!-- end main container -->
@@ -700,6 +483,28 @@
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/plugins.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+  <script>
+	$(document).ready(function(){
+		$("#subForm").submit(function(event) {
+			event.preventDefault();
+			request = $.ajax({
+				url: "/subscribe.php",
+				type: "post",
+				data: $("#subForm").serialize()
+			});
+			//$("#subEmail").val().serialize()
+			request.done(function (response, textStatus, jqXHR){
+				$("#btnSubSubmit").val("Hooray!");
+				$("#subEmail").val("");
+				$("#btnSubSubmit").prop("disabled", true);
+				$("#subEmail").prop("disabled", true);
+			});
+			request.fail(function (jqXHR, textStatus, errorThrown){
+				$("#btnSubSubmit").val("Try Again!");
+			});
+		});
+	});
+  </script>
 
 </body>
 

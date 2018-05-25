@@ -1,13 +1,11 @@
-
-
 <?php
 session_start();
 require 'connection.php';
 
 function validate_input($data){
-  $data = trim($data);
-  $data = stripslashes($data);
-  return $data;
+    $data = trim($data);
+    $data = stripslashes($data);
+    return $data;
 }
 
 $id = validate_input($_POST['regID']);
@@ -24,5 +22,4 @@ $_SESSION['loginUserPassword']= $pass_hash;
 echo '<script type="text/javascript">window.location.href="login.html";</script>';
 
 die();
-
 ?>
