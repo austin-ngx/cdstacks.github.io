@@ -1,4 +1,6 @@
-<!-- Navigation -->
+<?php
+session_start();
+?><!-- Navigation -->
     <header class="nav-type-1">
 
       <div class="top-bar hidden-sm hidden-xs">
@@ -108,19 +110,39 @@
                         </button>
                       </form>
                     </li>
-                    <li class="dropdown">
-                      <a href="#">Account</a>
-                      <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a href="login.html">Login</a>
-                        </li>
-                        <li>
-                          <a href="contact.html">Register</a>
-                        </li>
-                      </ul>
-                    </li>
-
+                    
+                    <?php 
+                    if (isset $_SESSION['loginUserName']){
+                    echo '  <li class="dropdown"> ';
+                    echo '  <a href="#">My Cart</a>';
+                    echo '  <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>';
+                    echo '  <ul class="dropdown-menu">';
+                    echo '    <li>';
+                    echo '    <div class="simpleCart_items"></div>';
+                    echo '    </li>';
+                    echo '    <li>';
+                    echo '    <a href="javascript:;" class="simpleCart_empty"></a>';
+                    echo '    </li>';
+                    echo '    <li>';
+                    echo '    <a href="javascript:;" class="simpleCart_checkout"></a>';
+                    echo '    </li>';
+                    echo '  </ul>';
+                    echo '</li>';
+                    } else {
+                    echo '  <li class="dropdown">';   
+                    echo '  <a href="#">Account</a>';
+                    echo '  <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>';
+                    echo '  <ul class="dropdown-menu">';
+                    echo '    <li>';
+                    echo '      <a href="login.html">Login</a>';
+                    echo '    </li>';
+                    echo '    <li>';
+                    echo '      <a href="contact.html">Register</a>';
+                    echo '    </li>';
+                    echo '  </ul>';
+                    echo '</li>';
+                    }
+                    ?>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
                       <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>
@@ -151,8 +173,9 @@
                         </li>
                       </ul>
                     </li>
-
-
+                  
+                    <li class="dropdown showCart">
+                      <a href="account.html"></a>
                     <li class="mobile-links">
                       <ul>
                         <li>
@@ -178,6 +201,7 @@
         </div>
         <!-- end navigation -->
       </nav>
-      <!-- end navbar -->
+      <!-- end navbar --> 
+      <script type="text/javascript" src="js/simpleCart.js"></script> 
     </header>
     <!-- end navigation -->
