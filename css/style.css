@@ -1643,13 +1643,13 @@ ol.numbers {
 
 .hero-heading {
     font-family: "Playfair Display", serif;
-    font-size: 62px;
+    font-size: 55px;
     font-weight: 700;
     margin-bottom: 12px;
 }
 
 .hero-heading.large {
-    font-size: 110px;
+    font-size: 60px;
 }
 
 .hero-subheading {
@@ -1658,7 +1658,7 @@ ol.numbers {
 }
 
 .hero-lines {
-    margin-bottom: 34px;
+    margin-bottom: 30px;
 }
 
 .hero-lines:before,
@@ -1685,8 +1685,8 @@ ol.numbers {
 #flexslider-hero .img-holder {
     position: absolute;
     top: 0;
-    height: 436px;
-    width: 60%;
+    height: 536px;
+    width: 100%;
     background-size: cover;
     background-position: center;
 }
