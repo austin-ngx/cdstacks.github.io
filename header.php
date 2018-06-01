@@ -112,7 +112,7 @@ session_start();
                     </li>
                     
                     <?php 
-                    if (isset $_SESSION['loginUserName']){
+                    if (isset($_SESSION['loginUserName'])){
                     echo '  <li class="dropdown"> ';
                     echo '  <a href="#">My Cart</a>';
                     echo '  <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>';

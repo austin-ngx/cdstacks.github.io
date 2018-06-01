@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,7 +25,6 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
-
 </head>
 
 <body class="relative">
@@ -190,7 +190,6 @@
     </div>
 
     <?php include 'footer.php'; ?>
-
   </main>
   <!-- end main container -->
 
@@ -221,7 +220,6 @@
 		});
 	});
   </script>
-
 </body>
 
 </html>
