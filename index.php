@@ -1,4 +1,3 @@
-                      <a href="#">About</a><!DOCTYPE html>
 <html lang="en">
 
 <head>

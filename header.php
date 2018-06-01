@@ -155,7 +155,7 @@ session_start();
 							if(mysqli_num_rows($results) > 0){
 								while($row = mysqli_fetch_assoc($results)){
 									echo '<li>';
-									echo '  <a href="shop-catalog.html">'.$row['NAME'].'</a>';
+									echo '  <a href="shop-catalog.php">'.$row['NAME'].'</a>';
 									echo '</li>';
 								}
 							}
