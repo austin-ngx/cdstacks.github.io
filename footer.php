@@ -17,21 +17,22 @@ echo <<<FOOTER
 							<div class="widget footer-get-in-touch">
 								<h5 class="widget-title uppercase">Contact</h5>
 								<address class="footer-address">
-									<span>Address:</span> .
+									<span>Address: </span>
+									<a target="_blank" href="https://goo.gl/maps/gybX4EZo1X42">Level 13, 120 Spencer Street - Melbourne VIC 3000</a>
 								</address>
 								<p>
 									Phone:
-									<a href="tel:+61">+61 123 456 789</a>
+									<a href="tel:+61390052328">+61 3 9005 2328</a>
 								</p>
 								<p>
 									Email:
 									<a href="mailto:admin@cdstacks.com">admin@cdstacks.com</a>
 								</p>
 								<div class="social-icons rounded mt-20">
-									<a href="https://twitter.com/ait">
+									<a href="https://twitter.com/AITcreative">
 										<i class="fa fa-twitter"></i>
 									</a>
-									<a href="https://facebook.com/ait">
+									<a href="https://www.facebook.com/AITcreative/">
 										<i class="fa fa-facebook"></i>
 									</a>
 								</div>

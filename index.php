@@ -53,7 +53,7 @@
             <?php
 				include 'connection.php';
 
-				$sql = 'SELECT * FROM PRODUCTS ORDER BY RAND() LIMIT 5';
+				$sql = 'SELECT ID, NAME FROM PRODUCTS ORDER BY RAND() LIMIT 5';
 				$results = mysqli_query($conn, $sql);
 				$productsArray = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
@@ -64,10 +64,9 @@
 						$picture = mysqli_fetch_assoc($results);
 						echo '<li>';
 						echo '  <img src="'.$picture["PATH"].'" alt="">';
-						echo '  <div class="hero-holder text-center right-align">';
+						echo '  <div class="hero-holder text-center">';
 						echo '    <div class="hero-lines">';
 						echo '      <h3 class="hero-heading white">'.$product["NAME"].'</h3>';
-						echo '      <h4 class="hero-subheading white uppercase">'.$product["DESCRIPTION"].'</h4>';
 						echo '    </div>';
 						echo '    <a href="shop-single-product.php?productId='.$product["ID"].'" class="btn btn-lg btn-white">';
 						echo '      <span>More info</span>';
