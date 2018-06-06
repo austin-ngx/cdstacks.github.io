@@ -19,7 +19,7 @@ mysqli_query($conn, $sql_insert);
 echo "Register successfully, now get you back to the login page...";
 $_SESSION['loginUserName']= $id;
 $_SESSION['loginUserPassword']= $pass_hash;
-echo '<script type="text/javascript">window.location.href="login.html";</script>';
+echo '<script type="text/javascript">window.location.href="login.php";</script>';
 
 die();
 ?>

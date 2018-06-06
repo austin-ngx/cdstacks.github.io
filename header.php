@@ -84,8 +84,9 @@ session_start();
                   </div>
                   <!-- Search -->
                   <div class="nav-search hidden-sm hidden-xs">
-                    <form method="get" action="search.php">
-                      <input type="search" class="form-control" placeholder="Search">
+                    <form method="get" action="shop-catalog.php?action=search&input=">
+                      <input type="hidden" name="action" value="search">
+                      <input name="input" type="search" class="form-control" placeholder="Search">
                       <button type="submit" class="search-button">
                         <i class="icon icon_search"></i>
                       </button>
@@ -134,10 +135,10 @@ session_start();
                     echo '  <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>';
                     echo '  <ul class="dropdown-menu">';
                     echo '    <li>';
-                    echo '      <a href="login.html">Login</a>';
+                    echo '      <a href="login.php">Login</a>';
                     echo '    </li>';
                     echo '    <li>';
-                    echo '      <a href="contact.html">Register</a>';
+                    echo '      <a href="login.php">Register</a>';
                     echo '    </li>';
                     echo '  </ul>';
                     echo '</li>';
@@ -149,13 +150,13 @@ session_start();
                       <ul class="dropdown-menu">
 						  <?php
 							include 'connection.php';
-							$sql = "SELECT NAME FROM GENRES";
+							$sql = "SELECT * FROM GENRES";
 							$results = mysqli_query($conn, $sql);
 
 							if(mysqli_num_rows($results) > 0){
 								while($row = mysqli_fetch_assoc($results)){
 									echo '<li>';
-									echo '  <a href="shop-catalog.php">'.$row['NAME'].'</a>';
+									echo '  <a href="shop-catalog.php?action=filter&categoryId='.$row['ID'].'">'.$row['NAME'].'</a>';
 									echo '</li>';
 								}
 							}
@@ -169,7 +170,7 @@ session_start();
                       <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"></i>
                       <ul class="dropdown-menu">
                         <li>
-                          <a href="about-us.html">About us</a>
+                          <a href="about-us.php">About us</a>
                         </li>
                       </ul>
                     </li>
