@@ -49,22 +49,27 @@
         <div class="entry-slider">
           <div class="flexslider" id="flexslider-hero">
             <ul class="slides clearfix">
+
             <?php
 				include 'connection.php';
 
-				$sql = "SELECT DISTINCT PRODUCTS.*, PICTURES.PATH FROM PRODUCTS INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID ORDER BY RAND() LIMIT 5";
+				$sql = 'SELECT * FROM PRODUCTS ORDER BY RAND() LIMIT 5';
 				$results = mysqli_query($conn, $sql);
+				$productsArray = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
-				if(mysqli_num_rows($results) > 0){
-					while($row = mysqli_fetch_assoc($results)){
+				if(count($productsArray) > 0){
+					foreach($productsArray as $product){
+						$sql = 'SELECT * FROM PICTURES WHERE PRODUCT_ID = '.$product['ID'];
+						$results = mysqli_query($conn, $sql);
+						$picture = mysqli_fetch_assoc($results);
 						echo '<li>';
-						echo '  <img src="'.$row["PATH"].'" alt="">';
+						echo '  <img src="'.$picture["PATH"].'" alt="">';
 						echo '  <div class="hero-holder text-center right-align">';
 						echo '    <div class="hero-lines">';
-						echo '      <h3 class="hero-heading white">'.$row["NAME"].'</h3>';
-						echo '      <h4 class="hero-subheading white uppercase">'.$row["DESCRIPTION"].'</h4>';
+						echo '      <h3 class="hero-heading white">'.$product["NAME"].'</h3>';
+						echo '      <h4 class="hero-subheading white uppercase">'.$product["DESCRIPTION"].'</h4>';
 						echo '    </div>';
-						echo '    <a href="shop-single-product.php?productId='.$row["ID"].'" class="btn btn-lg btn-white">';
+						echo '    <a href="shop-single-product.php?productId='.$product["ID"].'" class="btn btn-lg btn-white">';
 						echo '      <span>More info</span>';
 						echo '    </a>';
 						echo '  </div>';
@@ -72,47 +77,7 @@
 					}
 				}
             ?>
-              <!--<li>
-                <img src="img/slider/2.jpg" alt="">
-                <div class="hero-holder text-center">
-                  <div class="hero-lines">
-                    <h3 class="hero-subheading white small">Pitchfork's Best New Music</h3>
-                    <h6 class="hero-heading white large">Invasion of Privacy</h6>
-                    <h4 class="hero-subheading white uppercase">album by Cardi B</h4>
-                  </div>
-                  <a href="#" class="btn btn-lg btn-white">
-                    <span>More info</span>
-                  </a>
-                </div>
-              </li>
-              <li>
-                <img src="img/slider/3.gif" alt="">
-                <div class="hero-holder left-align">
-                  <div class="hero-lines">
-                    <h1 class="hero-heading white">10 best songs of 2017</h1>
-                    <p class="white">A review by Pitchfork</p>
-                    <p class="white"></p>
-                  </div>
-                  <a href="https://thescene.com/watch/pitchfork/pitchfork-docs-the-10-best-songs-of-2017" class="btn btn-lg btn-white">
-                    <span>Read more</span>
-                  </a>
-                </div>
-              </li>
-              <li>
-                <img src="img/slider/4.jpg" alt="">
-                <div class="hero-holder text-center right-align">
-                  <div class="hero-lines">
-                    <h3 class="hero-heading white">Album review: DAMN.</h>
-                      <p class="white">by Kendrick Lamar, 2017</p>
-                      <p class="white">DAMN. is a widescreen masterpiece of rap, full of expensive beats,
-                        <br> furious rhymes, and peerless storytelling about Kendrick’s destiny in America.</p>
-                  </div>
-                  <a href="https://pitchfork.com/reviews/albums/23147-damn/" class="btn btn-lg btn-white">
-                    <span>Read</span>
-                  </a>
-                </div>
-              </li>
-			  -->
+
             </ul>
           </div>
         </div>
@@ -135,30 +100,33 @@
 
         <div class="row row-10">
 			<?php
-				$sql = "SELECT DISTINCT PRODUCTS.*, ARTISTS.NAME as ARTIST, PICTURES.PATH FROM PRODUCTS ";
-				$sql .= "INNER JOIN PICTURES ON PRODUCTS.ID = PICTURES.PRODUCT_ID ";
+				$sql = "SELECT PRODUCTS.*, ARTISTS.NAME as ARTIST FROM PRODUCTS ";
 				$sql .= "INNER JOIN ARTISTS ON PRODUCTS.ARTIST_ID = ARTISTS.ID ";
 				$sql .= "ORDER BY ID DESC LIMIT 4";
 				$results = mysqli_query($conn, $sql);
-				if(mysqli_num_rows($results) > 0){
-					while($row = mysqli_fetch_assoc($results)){
+				$productsArray = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+				if(count($productsArray) > 0){
+					foreach($productsArray as $product){
+						$sql = 'SELECT * FROM PICTURES WHERE PRODUCT_ID = '.$product['ID'];
+						$results = mysqli_query($conn, $sql);
+						$picture = mysqli_fetch_assoc($results);
 						echo '<div class="col-md-3 col-xs-6">';
 						echo '  <div class="product-item">';
 						echo '    <div class="product-img">';
-						echo '      <a href="shop-single-product.php?productId='.$row["ID"].'">';
-						echo '        <img src="'.$row["PATH"].'" alt="">';
-						echo '          <img src="'.$row["PATH"].'" alt="" class="back-img">';
+						echo '      <a href="shop-single-product.php?productId='.$product["ID"].'">';
+						echo '        <img src="'.$picture["PATH"].'" alt="">';
 						echo '      </a>';
 						echo '      <a href="#" class="product-quickview">Read Review</a>';
 						echo '    </div>';
 						echo '    <div class="product-details">';
 						echo '      <h3>';
-						echo '        <a class="product-title" href="#">'.$row["NAME"].'</a>';
-						echo '        <p>'.$row["ARTIST"].'</p>';
+						echo '        <a class="product-title" href="#">'.$product["NAME"].'</a>';
+						echo '        <p>'.$product["ARTIST"].'</p>';
 						echo '      </h3>';
 						echo '      <span class="price">';
 						echo '        <ins>';
-						echo '          <span class="ammount">$'.$row["PRICE"].'</span>';
+						echo '          <span class="ammount">$'.$product["PRICE"].'</span>';
 						echo '        </ins>';
 						echo '      </span>';
 						echo '    </div>';
