@@ -41,6 +41,18 @@ else{
 	$result = mysqli_query($conn, $sql);
 	$productList = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+$minValue = 999;
+$maxValue = 0;
+if(count($productList) > 0){
+	foreach($productList as $item){
+		if($item['PRICE'] > $maxValue){
+			$maxValue = $item['PRICE'];
+		}
+		if($item['PRICE'] < $minValue){
+			$minValue = $item['PRICE'];
+		}
+	}
+}
 ?>
 
   <!DOCTYPE html>
@@ -101,11 +113,11 @@ else{
             <div class="col-md-9 catalogue-col right mb-50">
 
               <div class="shop-filter">
-                <p class="result-count">Showing: 1-6 of <?php echo count($productList); ?> results</p>
+                <p class="result-count">Showing: <?php echo count($productList); ?> products</p>
 
                 <div class="shop-catalogue grid-view left">
 
-                  <div class="row row-10 items-grid">
+                  <div class="row row-3 items-grid">
 
                     <!--<div class="col-md-4 col-xs-6">
                       <div class="product-item">
@@ -157,11 +169,11 @@ else{
 							if(mysqli_fetch_assoc($result)['QUANTITY'] < 1){
 								echo '<span class="sold-out valign">out of stock</span>';
 							}
-							echo '	<div class="product-actions">';
-							echo '		<a href="#" class="product-add-to-wishlist" data-toggle="tooltip" data-placement="bottom" title="Add to wishlist">';
-							echo '			<i class="fa fa-heart"></i>';
-							echo '		</a>';
-							echo '	</div>';
+							// echo '	<div class="product-actions">';
+							// echo '		<a href="#" class="product-add-to-wishlist" data-toggle="tooltip" data-placement="bottom" title="Add to wishlist">';
+							// echo '			<i class="fa fa-heart"></i>';
+							// echo '		</a>';
+							// echo '	</div>';
 							echo '	<a href="shop-single-product.php?productId='.$item['ID'].'" class="product-quickview">Know More</a>';
 							echo '</div>';
 							echo '<div class="product-details">';
@@ -179,138 +191,6 @@ else{
 							echo '</div>';
 						}
 						?>
-                          
-					<!--
-                    <div class="col-md-4 col-xs-6">
-                      <div class="product-item">
-                        <div class="product-img">
-                          <a href="#">
-                            <img src="img/shop/shop_item_3.jpg" alt="">
-                            <img src="img/shop/shop_item_3_back.jpg" alt="" class="back-img">
-                          </a>
-                          <span class="sold-out valign">out of stock</span>
-                          <div class="product-actions">
-                            <a href="#" class="product-add-to-compare" data-toggle="tooltip" data-placement="bottom" title="Add to compare">
-                              <i class="fa fa-exchange"></i>
-                            </a>
-                            <a href="#" class="product-add-to-wishlist" data-toggle="tooltip" data-placement="bottom" title="Add to wishlist">
-                              <i class="fa fa-heart"></i>
-                            </a>
-                          </div>
-                          <a href="#" class="product-quickview">Quick View</a>
-                        </div>
-                        <div class="product-details">
-                          <h3>
-                            <a class="product-title" href="shop-single-product.html">reputation</a>
-                            <p>Taylor Swift</p>
-                          </h3>
-                          <span class="price">
-                            <ins>
-                              <span class="ammount">$9.00</span>
-                          </ins>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 col-xs-6">
-                      <div class="product-item">
-                        <div class="product-img">
-                          <a href="#">
-                            <img src="img/shop/shop_item_4.jpg" alt="">
-                            <img src="img/shop/shop_item_4_back.jpg" alt="" class="back-img">
-                          </a>
-                          <div class="product-actions">
-                            <a href="#" class="product-add-to-compare" data-toggle="tooltip" data-placement="bottom" title="Add to compare">
-                              <i class="fa fa-exchange"></i>
-                            </a>
-                            <a href="#" class="product-add-to-wishlist" data-toggle="tooltip" data-placement="bottom" title="Add to wishlist">
-                              <i class="fa fa-heart"></i>
-                            </a>
-                          </div>
-                          <a href="#" class="product-quickview">Quick View</a>
-                        </div>
-                        <div class="product-details">
-                          <h3>
-                            <a class="product-title" href="shop-single-product.html">Melodrama</a>
-                            <p>Lorde</p>
-                          </h3>
-                          <span class="price">
-                            <ins>
-                              <span class="ammount">$120.00</span>
-                          </ins>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 col-xs-6">
-                      <div class="product-item">
-                        <div class="product-img">
-                          <a href="#">
-                            <img src="img/shop/shop_item_1.jpg" alt="">
-                            <img src="img/shop/shop_item_1_back.jpg" alt="" class="back-img">
-                          </a>
-                          <div class="product-actions">
-                            <a href="#" class="product-add-to-compare" data-toggle="tooltip" data-placement="bottom" title="Add to compare">
-                              <i class="fa fa-exchange"></i>
-                            </a>
-                            <a href="#" class="product-add-to-wishlist" data-toggle="tooltip" data-placement="bottom" title="Add to wishlist">
-                              <i class="fa fa-heart"></i>
-                            </a>
-                          </div>
-                          <a href="#" class="product-quickview">Quick View</a>
-                        </div>
-
-                        <div class="product-details">
-                          <h3>
-                            <a class="product-title" href="shop-single-product.html">Man of the Woods</a>
-                            <p>Justin Timberlake</p>
-                          </h3>
-                          <span class="price">
-                            <ins>
-                              <span class="ammount">$399.00</span>
-                          </ins>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 col-xs-6">
-                      <div class="product-item">
-                        <div class="product-img">
-                          <a href="#">
-                            <img src="img/shop/shop_item_6.jpg" alt="">
-                            <img src="img/shop/shop_item_6_back.jpg" alt="" class="back-img">
-                          </a>
-                          <div class="product-label">
-                            <span class="sale">sale</span>
-                          </div>
-                          <div class="product-actions">
-                            <a href="#" class="product-add-to-compare" data-toggle="tooltip" data-placement="bottom" title="Add to compare">
-                              <i class="fa fa-exchange"></i>
-                            </a>
-                            <a href="#" class="product-add-to-wishlist" data-toggle="tooltip" data-placement="bottom" title="Add to wishlist">
-                              <i class="fa fa-heart"></i>
-                            </a>
-                          </div>
-                          <a href="#" class="product-quickview">Quick View</a>
-                        </div>
-
-                        <div class="product-details">
-                          <h3>
-                            <a class="product-title" href="shop-single-product.html">Invasion of Privacy</a>
-                            <p>Cardi B</p>
-                          </h3>
-                          <span class="price">
-                            <ins>
-                              <span class="ammount">$19.00</span>
-                          </ins>
-                          </span>
-                        </div>
-                      </div>
-					</div>
-					-->
                   </div>
                   <!-- end row -->
                 </div>
@@ -319,13 +199,13 @@ else{
                 <div class="clear"></div>
                 
                 <!-- Pagination -->
-                <div class="pagination-wrap">
+                <!--<div class="pagination-wrap">
                   <nav class="pagination right clear">
                     <a href="#"><i class="fa fa-angle-left"></i></a>
                     <span class="page-numbers current">1</span>
                     <a href="#"><i class="fa fa-angle-right"></i></a>
                   </nav>
-                </div>
+                </div>-->
               </div>
             </div>
             <!-- end col -->
@@ -382,6 +262,12 @@ else{
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
+	<script>
+		var minPrice = <?php echo $minValue; ?>;
+		var maxPrice = <?php echo $maxValue; ?>;
+        var $selectedMinValue = minPrice;
+        var $selectedMaxValue = maxPrice;
+	</script>
     <script type="text/javascript" src="js/scripts.js"></script>
 
   </body>
