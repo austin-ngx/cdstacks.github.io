@@ -2,7 +2,7 @@
 <html lang="en">
 
         <head>
-                <title>CDStacks - Online CD Store</title>
+                <title>My Cart</title>
               
                 <meta charset="utf-8">
                 <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -61,19 +61,41 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="Account">
-
-                        <div class="userInfo">
-                            <h4 class="uppercase">Hello</h4>
-                            <h6><?php echo("{$_SESSION['test']}"."<br />");?></h6>
-                        </div>
-
-                        <h4 class="uppercase">My Items</h4>
-                        <div class="simpleCart_items"></div>
-
-                    </div>
-
-                </div>
+<div id="content">
+		<h1>Your Shopping Cart</h1>
+		<form id="shopping-cart" action="cart.html" method="post">
+			<table class="shopping-cart">
+			  <thead>
+				<tr>
+					<th scope="col">Item</th>
+					<th scope="col">Qty</th>
+					<th scope="col" colspan="2">Price</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			  
+			  </tbody>
+			</table>
+			<p id="sub-total">
+				<strong>Sub Total</strong>: <span id="stotal"></span>
+			</p>
+			<ul id="shopping-cart-actions">
+				<li>
+					<input type="submit" name="update" id="update-cart" class="btn" value="Update Cart" />
+				</li>
+				<li>
+					<input type="submit" name="delete" id="empty-cart" class="btn" value="Empty Cart" />
+				</li>
+				<li>
+					<a href="index.html" class="btn">Continue Shopping</a>
+				</li>
+				<li>
+					<a href="checkout.html" class="btn">Go To Checkout</a>
+				</li>
+			</ul>
+		</form>
+	</div>
+	
             </div>
             </section>
             <?php include 'footer.php'; ?>
@@ -86,6 +108,7 @@
     <script type="text/javascript" src="js/simpleCart.js"></script>       
     <script type="text/javascript" src="js/plugins.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/jquery.shop.js"></script>
 
     
 

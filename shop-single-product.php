@@ -107,7 +107,7 @@
 					</div>
 					<!-- end col img slider -->
 					<div class="col-sm-6 col-xs-12 product-description-wrap simpleCart_selfItem">
-						<h1 class="product-title item_name"><?php echo $productObject["NAME"]; ?></h1>
+						<h1 class="product-title product-name"><?php echo $productObject["NAME"]; ?></h1>
 						
 						<div class="product_meta">
 							<!--<span class="sku">SKU: <a href="#">111763</a></span>-->
@@ -125,7 +125,7 @@
 								<span>$<?php echo $productObject["PRICE"] * 1.3; ?></span>
 							</del>
 							<ins>
-								<span class="amount item_price">$<?php echo $productObject["PRICE"]; ?></span>
+								<span class="amount product-price">$<?php echo $productObject["PRICE"]; ?></span>
 							</ins>
 						</span>
 
@@ -155,7 +155,14 @@
 						</div>
 
 						<ul class="product-actions clearfix">
-
+						<form class="add-to-cart" action="LoginCheck.php" method="post">
+							<div>
+								<label for="qty-2">Quantity</label>
+								<input type="text" name="qty-2" id="qty-2" class="qty" value="1" />
+							</div>
+							<p><input type="submit" value="Add to Cart" class="btn" /></p>
+						</form>
+<!-- javaScript Cart alternative solution 
 							<li>
 								<a href="javascript:;" class="item_add btn btn-color btn-lg add-to-cart left"><span>Add to Cart</span></a>
 							</li>
@@ -170,7 +177,7 @@
 									<input id="inputQty" type="number" step="1" min="0" max="10" value="1" title="Qty" class="input-text qty text item_Quantity" />
 									<input id="btnPlus" type="button" value="+" class="plus" />
 								</div>
-							</li>
+							</li> -->
 						</ul>
 
 						<!--<div class="socials-share clearfix">
@@ -242,7 +249,21 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/plugins.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
-    <script type="text/javascript" src="js/simpleCart.js"></script> 
+<!-- dead cart    <script type="text/javascript" src="js/simpleCart.js"></script> -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 	<script>
 		$('#btnMinus').click(function(){
 			var iNum = parseInt($('#inputQty').val());

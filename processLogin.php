@@ -23,7 +23,8 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) == 1){
             $_SESSION['loginUserName']=$username; // Initializing Session
-            header("location: account.php"); // Redirecting To Other Page
+            $_SESSION['isSignedIn']=true; 
+            header("location: account.php"); // Redirecting To User Page
         } else {
             $error = "Username or Password is invalid";
         }
